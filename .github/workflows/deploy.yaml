@@ -3,7 +3,7 @@ name: Deploy Quartz site to GitHub Pages
 on:
   push:
     branches:
-      - v5  # или твоя рабочая ветка
+      - v5
 
 permissions:
   contents: read
@@ -24,10 +24,13 @@ jobs:
           
       - uses: actions/setup-node@v4
         with:
-          node-version: 26  # 👈 обновлено до LTS
+          node-version: 26
           
       - name: Install Dependencies
         run: npm ci
+        
+      - name: Install Quartz plugins  # 👈 ДОБАВЬ ЭТОТ ШАГ
+        run: npx quartz plugin install
         
       - name: Build Quartz
         run: npx quartz build
